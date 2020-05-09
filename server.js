@@ -23,6 +23,7 @@ const uri = "mongodb+srv://Paulo:123456pc@bancoteste-vux9e.mongodb.net/test?retr
 MongoClient.connect(uri, (err, client) => {
   
     if (err) return console.log('\nPaulo@Server.JS >> Erro MongoDB(1): ' + err.name + '\n\tMensagem de erro: ' + err.errmsg)
+    
     db = client.db('bancoteste')
     
     app.listen(portaDB, () => console.log("\nPaulo@Server.JS >> MongoDB Working at " + portaDB + ' ...') )
@@ -85,13 +86,31 @@ app.route('/editar/:id').get((req, res) =>{
     var id = req.params.id
     var name = req.body.name
     var surname = req.body.surname
+    var cpf = req.body.cpf
+    var celular = req.body.celular
+    var idade = req.body.idade
+    var peso = req.body.peso
+    var exercicio = req.body.exercicio
+    var genero = req.body.genero
+    var msg = req.body.msg
+    var email = req.body.email
+
 
     console.log("\n###  Entrou .post linha 85   ###\n")
     //atualizando o bd
     db.collection('data').updateOne({ _id: ObjectId(id)}, {
         $set: {
-            name: name,
-            surname: surname
+            id : id,
+            name : name,
+            surname : surname,
+            cpf : cpf,
+            celular : celular,
+            idade : idade,
+            peso : peso,
+            exercicio : exercicio,
+            genero : genero,
+            msg : msg,
+            email: email
         }
         
     },
